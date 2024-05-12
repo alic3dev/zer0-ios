@@ -7,7 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		917295882BF070B4007134C0 /* zer0_ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295872BF070B4007134C0 /* zer0_ios.swift */; };
+		9172959B2BF07499007134C0 /* Phase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9172959A2BF07499007134C0 /* Phase.swift */; };
+		9172959D2BF0751D007134C0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9172959C2BF0751D007134C0 /* Constants.swift */; };
+		9172959F2BF114F1007134C0 /* Signals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9172959E2BF114F1007134C0 /* Signals.swift */; };
+		917295A12BF1190A007134C0 /* Frequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A02BF1190A007134C0 /* Frequencies.swift */; };
+		917295A32BF11919007134C0 /* Scales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A22BF11919007134C0 /* Scales.swift */; };
+		917295A52BF11A34007134C0 /* Oscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A42BF11A34007134C0 /* Oscillator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +29,12 @@
 
 /* Begin PBXFileReference section */
 		917295842BF070B4007134C0 /* libzer0-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libzer0-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		917295872BF070B4007134C0 /* zer0_ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zer0_ios.swift; sourceTree = "<group>"; };
+		9172959A2BF07499007134C0 /* Phase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phase.swift; sourceTree = "<group>"; };
+		9172959C2BF0751D007134C0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		9172959E2BF114F1007134C0 /* Signals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signals.swift; sourceTree = "<group>"; };
+		917295A02BF1190A007134C0 /* Frequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequencies.swift; sourceTree = "<group>"; };
+		917295A22BF11919007134C0 /* Scales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scales.swift; sourceTree = "<group>"; };
+		917295A42BF11A34007134C0 /* Oscillator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oscillator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +67,22 @@
 		917295862BF070B4007134C0 /* zer0-ios */ = {
 			isa = PBXGroup;
 			children = (
-				917295872BF070B4007134C0 /* zer0_ios.swift */,
+				917295992BF07488007134C0 /* Utils */,
+				917295A42BF11A34007134C0 /* Oscillator.swift */,
 			);
 			path = "zer0-ios";
+			sourceTree = "<group>";
+		};
+		917295992BF07488007134C0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9172959A2BF07499007134C0 /* Phase.swift */,
+				9172959C2BF0751D007134C0 /* Constants.swift */,
+				9172959E2BF114F1007134C0 /* Signals.swift */,
+				917295A02BF1190A007134C0 /* Frequencies.swift */,
+				917295A22BF11919007134C0 /* Scales.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +143,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				917295882BF070B4007134C0 /* zer0_ios.swift in Sources */,
+				917295A32BF11919007134C0 /* Scales.swift in Sources */,
+				917295A52BF11A34007134C0 /* Oscillator.swift in Sources */,
+				9172959F2BF114F1007134C0 /* Signals.swift in Sources */,
+				917295A12BF1190A007134C0 /* Frequencies.swift in Sources */,
+				9172959B2BF07499007134C0 /* Phase.swift in Sources */,
+				9172959D2BF0751D007134C0 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
