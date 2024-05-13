@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Phase {
+final class Phase {
   private var phase: Float = 0
   private var increment: Float = (TWO_PI / 44000) * 440
 

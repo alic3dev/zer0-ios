@@ -13,6 +13,7 @@
 		917295A12BF1190A007134C0 /* Frequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A02BF1190A007134C0 /* Frequencies.swift */; };
 		917295A32BF11919007134C0 /* Scales.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A22BF11919007134C0 /* Scales.swift */; };
 		917295A52BF11A34007134C0 /* Oscillator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A42BF11A34007134C0 /* Oscillator.swift */; };
+		917295A72BF13231007134C0 /* Synth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917295A62BF13231007134C0 /* Synth.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		917295A02BF1190A007134C0 /* Frequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequencies.swift; sourceTree = "<group>"; };
 		917295A22BF11919007134C0 /* Scales.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scales.swift; sourceTree = "<group>"; };
 		917295A42BF11A34007134C0 /* Oscillator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Oscillator.swift; sourceTree = "<group>"; };
+		917295A62BF13231007134C0 /* Synth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Synth.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			children = (
 				917295992BF07488007134C0 /* Utils */,
 				917295A42BF11A34007134C0 /* Oscillator.swift */,
+				917295A62BF13231007134C0 /* Synth.swift */,
 			);
 			path = "zer0-ios";
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 				917295A32BF11919007134C0 /* Scales.swift in Sources */,
 				917295A52BF11A34007134C0 /* Oscillator.swift in Sources */,
 				9172959F2BF114F1007134C0 /* Signals.swift in Sources */,
+				917295A72BF13231007134C0 /* Synth.swift in Sources */,
 				917295A12BF1190A007134C0 /* Frequencies.swift in Sources */,
 				9172959B2BF07499007134C0 /* Phase.swift in Sources */,
 				9172959D2BF0751D007134C0 /* Constants.swift in Sources */,

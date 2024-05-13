@@ -22,24 +22,38 @@ public enum OscillatorType: Int {
   case square
 }
 
-public class Oscillator {
-  let engine: AVAudioEngine
-  let sampleRate: Float
-  let phase: Phase
+public typealias onOscillatorRenderFrameFunc = (Float) -> Float
+public typealias onOscillatorRenderFunc = () -> onOscillatorRenderFrameFunc
 
-  var frequency: Float
+public final class Oscillator {
+  private let engine: AVAudioEngine
+  private let sampleRate: Float
+  private let phase: Phase
+
+  private var srcNode: AVAudioSourceNode?
+  private var onRender: onOscillatorRenderFunc = { { _ in 0.0 }}
+  private var frequency: Float
+
+  public var hasStarted: Bool = false
   public var amplitude: Float
+  public var volume: Float = 1.0
   public var type: OscillatorType
-  var srcNode: AVAudioSourceNode?
-  var hasStarted: Bool = false
 
-  public init(engine: AVAudioEngine, sampleRate: Float, frequency: Float = 440, type: OscillatorType = .custom, amplitude: Float = 1.0) {
+  public init(engine: AVAudioEngine, sampleRate: Float, frequency: Float = 0, type: OscillatorType = .custom, amplitude: Float = 1.0) {
     self.engine = engine
     self.sampleRate = sampleRate
     self.phase = .init(sampleRate: sampleRate, frequency: frequency)
     self.frequency = frequency
     self.amplitude = amplitude
     self.type = type
+  }
+
+  public func copy() -> Oscillator {
+    let oscillator = Oscillator(engine: self.engine, sampleRate: self.sampleRate, frequency: self.frequency, type: self.type, amplitude: self.amplitude)
+    oscillator.volume = self.volume
+    oscillator.start(onRender: self.onRender)
+
+    return oscillator
   }
 
   public func setFrequency(frequency: Float) {
@@ -51,11 +65,20 @@ public class Oscillator {
     )
   }
 
-  public func start(onRender: @escaping () -> ((Float) -> Float)) {
+  public func start(onRender: @escaping onOscillatorRenderFunc) {
+    self.onRender = onRender
+
+    if self.srcNode != nil || self.hasStarted {
+      return
+    }
+
     self.srcNode = AVAudioSourceNode { _, _, frameCount, audioBufferList -> OSStatus in
       let ablPointer = UnsafeMutableAudioBufferListPointer(audioBufferList)
 
-      let onFrame: ((Float) -> Float) = onRender()
+      let onFrame: onOscillatorRenderFrameFunc = self.onRender()
+
+      let amplitude = self.amplitude
+      let volume = self.volume
 
       for frame in 0 ..< Int(frameCount) {
         let phaseValue: Float = self.phase.value()
@@ -80,7 +103,8 @@ public class Oscillator {
           value = SignalWhiteNoise.generate(phaseValue)
         }
 
-        value *= self.amplitude
+        value *= amplitude
+        value *= volume
 
         self.phase.advance()
 
