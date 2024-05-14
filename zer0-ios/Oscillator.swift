@@ -65,7 +65,7 @@ public final class Oscillator {
     )
   }
 
-  public func start(onRender: @escaping onOscillatorRenderFunc) {
+  public func start(onRender: @escaping onOscillatorRenderFunc = {{ _ in 0.0 }}) {
     self.onRender = onRender
 
     if self.srcNode != nil || self.hasStarted {
