@@ -8,9 +8,21 @@
 import AVFAudio
 import Foundation
 
+public struct SynthModifier: Identifiable {
+  public var id: UUID = .init()
+  public var name: String
+  public var iconMin: String = ""
+  public var iconMax: String = ""
+  public var value: Float
+  public var valueMin: Float = 0.0
+  public var valueMax: Float = 1.0
+}
+
 public typealias onSynthRenderFunc = () -> Void
 
-public final class Synth {
+open class Synth: Identifiable {
+  public let id: UUID = .init()
+
   private var srcNode: AVAudioSourceNode?
   private var onRender: onSynthRenderFunc = {}
 
@@ -24,11 +36,21 @@ public final class Synth {
   private var currentPolyphonyChannel: Int = 0
   private var playIndex: [UInt64] = []
 
+  public var name: String = "Default Synth"
+  public var enabled: Bool = true
+  public var stopped: Bool = false
+
   public var attack: Float = 1.0
   public var decay: Float = 1.0
   public var sustain: Float = 0.75
   public var sustainDuration: Float = 0.5
   public var release: Float = 2.0
+
+  public var modifiers: [SynthModifier] = []
+  public var delays: [AVAudioUnitDelay] = []
+  public var reverbs: [AVAudioUnitReverb] = []
+  public var eqs: [AVAudioUnitEQ] = []
+  public var distortions: [AVAudioUnitDistortion] = []
 
   public var resetVolumeOnNote: Bool = true
 
@@ -81,7 +103,7 @@ public final class Synth {
     }
   }
 
-  public func start(onRender: @escaping onSynthRenderFunc) {
+  open func start(onRender: @escaping onSynthRenderFunc) {
     self.onRender = onRender
 
     if self.srcNode != nil {
@@ -96,7 +118,7 @@ public final class Synth {
     self.engine.attach(self.srcNode!)
   }
 
-  public func connect(to: AVAudioNode, format: AVAudioFormat?) throws {
+  open func connect(to: AVAudioNode, format: AVAudioFormat?) throws {
     self.engine.connect(self.srcNode!, to: self.mixer, format: format)
 
     for (index, oscillatorGroup) in self.oscillators.enumerated() {
@@ -110,7 +132,11 @@ public final class Synth {
     self.engine.connect(self.mixer, to: to, format: format)
   }
 
-  public func playNote(frequency: Float) {
+  open func playNote(frequency: Float) {
+    if !self.enabled || self.stopped {
+      return
+    }
+
     let polyphonyChannel: Int = self.currentPolyphonyChannel
 
     self.playIndex[polyphonyChannel] += 1
@@ -126,10 +152,10 @@ public final class Synth {
         return
       }
 
-      let steps = Int(duration * 60.0)
+      let steps: Int = .init(duration * 60.0)
 
       for i in 0 ... steps {
-        let delayTime = Double(duration / Float(steps) * Float(i))
+        let delayTime: Double = .init(duration / Float(steps) * Float(i))
 
         DispatchQueue.main.asyncAfter(deadline: .now() + delayTime) {
           if currentPlayIndex != self.playIndex[polyphonyChannel] {
@@ -146,7 +172,6 @@ public final class Synth {
           }
 
           self.oscillatorMixers[polyphonyChannel].outputVolume = newVolume
-//          self.oscillatorMixers.forEach { osc in osc.volume = newVolume }
 
           if i == steps {
             onComplete()
