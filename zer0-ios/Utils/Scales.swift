@@ -13,7 +13,6 @@ public struct Scale: Hashable {
 
   public func hash(into hasher: inout Hasher) {
     hasher.combine(self.name)
-    hasher.combine(self.notes)
   }
 }
 
