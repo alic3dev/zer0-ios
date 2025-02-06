@@ -7,39 +7,6 @@
 
 import Foundation
 
-//  export type Note =
-//    | 'A'
-//    | 'A#'
-//    | 'B'
-//    | 'C'
-//    | 'C#'
-//    | 'D'
-//    | 'D#'
-//    | 'E'
-//    | 'F'
-//    | 'F#'
-//    | 'G'
-//    | 'G#'
-//
-//  export const notes: Note[] = [
-//    'C',
-//    'C#',
-//    'D',
-//    'D#',
-//    'E',
-//    'F',
-//    'F#',
-//    'G',
-//    'G#',
-//    'A',
-//    'A#',
-//    'B',
-//  ]
-//
-//  export type Octave = {
-//    [note in Note]: number
-//  }
-
 public enum FrequencyRoot: Float {
   case standard = 440
   case magic = 432
